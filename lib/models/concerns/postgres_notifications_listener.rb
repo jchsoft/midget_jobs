@@ -1,0 +1,26 @@
+# frozen_string_literal: true
+
+module PostgresNotificationsListener
+  include ActionView::Helpers::UrlHelper
+
+  def listen_notifications
+    Rails.logger.debug "#{self.name} listening_job started"
+    Thread.new do
+      Rails.logger.debug "#{self.name} listening_job running on #{self.name.pluralize.underscore}_notices"
+      self.connection.execute "LISTEN #{self.name.pluralize.underscore}_notices"
+      loop do
+        Rails.logger.debug "#{self.name} listening_job wait_for_notify"
+        begin
+          self.connection.raw_connection.wait_for_notify do |event, pid, payload|
+            data = JSON.parse payload, symbolize_names: true
+            Rails.logger.debug "postgres #{event.inspect}, pid: #{pid.inspect}, data: #{data.inspect}"
+            process_notification(data)
+          end
+        rescue StandardError => error
+          Rails.logger.debug "-------------Ex #{self.name} listening_job wait_for_notify #{error}----------------"
+          retry
+        end
+      end
+    end.abort_on_exception = true
+  end
+end

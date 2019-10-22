@@ -1,0 +1,10 @@
+Description:
+    This generator creates an initializer file at config/initializers and migrations to db/migrate
+
+Example:
+    rails generate midget_jobs:install
+
+    This will create:
+        config/initializers/midget_jobs.rb
+        db/migrate/#{Time.now.strftime "%Y%m%d%H%M%S"}_create_midget_jobs.rb
+        db/migrate/#{Time.now.strftime "%Y%m%d%H%M%S"}_create_midget_triggers.rb
