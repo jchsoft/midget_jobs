@@ -1,4 +1,6 @@
-class MidgetJob < ApplicationRecord
+require 'models/concerns/postgres_notifications_listener'
+
+class MidgetJob < ActiveRecord::Base
   extend PostgresNotificationsListener
 
   scope :for_processing, -> { where('run_at < ?', Time.current) }

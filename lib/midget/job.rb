@@ -1,3 +1,6 @@
+require 'models/midget_job'
+require 'midget/scheduler'
+
 module Midget
   class Job
     class_attribute :listener

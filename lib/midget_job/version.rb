@@ -1,3 +1,3 @@
-module MidgetJob
-  VERSION = "0.1.0"
+module MidgetJobs
+  VERSION = "0.1.1"
 end

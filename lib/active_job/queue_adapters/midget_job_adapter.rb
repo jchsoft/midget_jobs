@@ -1,3 +1,5 @@
+require 'midget/job'
+
 module ActiveJob
   module QueueAdapters
     class MidgetJobAdapter

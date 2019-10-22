@@ -6,7 +6,7 @@ module MidgetJobs
     def copy_install_file
       copy_file "midget_job_initializer.rb", "config/initializers/midget_jobs.rb"
       copy_file "create_midget_jobs.rb", "db/migrate/#{Time.now.strftime "%Y%m%d%H%M%S"}_create_midget_jobs.rb"
-      copy_file "create_midget_triggers.rb", "db/migrate/#{Time.now.strftime "%Y%m%d%H%M%S"}_create_midget_triggers.rb"
+      copy_file "create_midget_triggers.rb", "db/migrate/#{(Time.now + 1).strftime "%Y%m%d%H%M%S"}_create_midget_triggers.rb"
     end
   end
 end

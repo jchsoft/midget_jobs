@@ -3,21 +3,21 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "midget_job/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "midget_job"
-  spec.version       = MidgetJob::VERSION
+  spec.name          = "midget_jobs"
+  spec.version       = MidgetJobs::VERSION
   spec.authors       = ["josefchmel"]
   spec.email         = ["chmel@jchsoft.cz"]
 
   spec.summary       = %q{Small background job scheduler closely related with Rails ActiveJob.}
   # spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/jchsoft/midget_jobs"
   spec.license       = "MIT"
 
   spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["source_code_uri"] = "https://github.com/jchsoft/midget_jobs"
+  # spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

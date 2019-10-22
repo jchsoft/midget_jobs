@@ -2,7 +2,7 @@ require "test_helper"
 
 class MidgetJobTest < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::MidgetJob::VERSION
+    refute_nil ::MidgetJobs::VERSION
   end
 
   def test_it_does_something_useful
