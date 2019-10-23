@@ -1,4 +1,4 @@
-require 'midget/job'
+require 'midget_jobs/job'
 
 module ActiveJob
   module QueueAdapters
@@ -27,7 +27,7 @@ module ActiveJob
 
       end
 
-      class JobWrapper < Midget::Job
+      class JobWrapper < MidgetJobs::Job
         def run(serialized_job)
           Base.execute serialized_job
         end

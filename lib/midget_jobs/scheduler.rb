@@ -1,4 +1,4 @@
-module Midget
+module MidgetJobs
   class Scheduler
     def call
       Rails.logger.info "#{self.class.name} starting"

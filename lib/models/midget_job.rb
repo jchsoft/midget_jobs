@@ -20,6 +20,6 @@ class MidgetJob < ActiveRecord::Base
   end
 
   def self.process_notification(hash_data)
-    Midget::Job.process_notification hash_data
+    MidgetJobs::Job.process_notification hash_data
   end
 end

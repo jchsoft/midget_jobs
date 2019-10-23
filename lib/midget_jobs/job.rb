@@ -1,7 +1,7 @@
 require 'models/midget_job'
-require 'midget/scheduler'
+require 'midget_jobs/scheduler'
 
-module Midget
+module MidgetJobs
   class Job
     class_attribute :scheduler
 
@@ -17,7 +17,7 @@ module Midget
       end
 
       def schedule
-        @scheduler = Midget::Scheduler.new.call
+        @scheduler = MidgetJobs::Scheduler.new.call
       end
 
       def process_notification(hash_data)

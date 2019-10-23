@@ -1,13 +1,13 @@
-require "midget_job/version"
+require "midget_jobs/version"
 require 'active_job/queue_adapters/midget_job_adapter'
-require 'midget/job'
-require 'midget/scheduler'
+require 'midget_jobs/job'
+require 'midget_jobs/scheduler'
 require 'models/midget_job'
 
 module MidgetJobs
   class Error < StandardError; end
   def self.initialize_workers
-    Midget::Job.schedule
+    MidgetJobs::Job.schedule
     MidgetJob.listen_notifications
   end
 end
