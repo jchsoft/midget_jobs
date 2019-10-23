@@ -1,9 +1,9 @@
 require 'test_helper'
-require 'generators/midget_install/midget_install_generator'
+require 'generators/midget_jobs/install_generator'
 
 class MidgetInstallGeneratorTest < Rails::Generators::TestCase
-  tests MidgetInstallGenerator
-  destination Rails.root.join('tmp/generators')
+  tests MidgetJobs::InstallGenerator
+  destination '' # n Rails.root.join('tmp/generators')
   setup :prepare_destination
 
   # test "generator runs without errors" do

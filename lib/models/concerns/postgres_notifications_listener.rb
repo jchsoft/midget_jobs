@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module PostgresNotificationsListener
-  include ActionView::Helpers::UrlHelper
-
   def listen_notifications
     Rails.logger.info "#{self.name} listening_job started"
     Thread.new do
