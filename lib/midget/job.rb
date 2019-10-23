@@ -3,7 +3,7 @@ require 'midget/scheduler'
 
 module Midget
   class Job
-    class_attribute :listener
+    class_attribute :scheduler
 
     class << self
       # @param [ActiveJob::Base] job
@@ -13,19 +13,18 @@ module Midget
       end
 
       def enqueued_jobs
-        ActiveRecord::Relation.send :alias_method, :clear, :delete_all
         MidgetJob.all
       end
 
       def schedule
-        @listener = Midget::Scheduler.new.call
+        @scheduler = Midget::Scheduler.new.call
       end
 
       def process_notification(hash_data)
         Rails.logger.info "#{self.name}.#{__method__}(#{hash_data})"
         case hash_data[:action]
           when 'INSERT'
-            @listener.wakeup!
+            @scheduler.wakeup!
           else
             raise "unknown action #{hash_data[:action]}"
         end

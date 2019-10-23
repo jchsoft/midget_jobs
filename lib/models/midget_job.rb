@@ -8,7 +8,7 @@ class MidgetJob < ActiveRecord::Base
   validates :job_id, :queue, :serialized, :run_at, presence: true
 
   def fire_thread
-    Rails.logger.info "#{self.class.name} fire_thread started"
+    Rails.logger.info "#{self.class.name}.fire_thread started"
     Thread.new do
       Rails.logger.info "#{self.class.name}.fire_thread execute serialized job"
       begin
