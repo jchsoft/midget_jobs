@@ -21,7 +21,7 @@ module Midget
 
     def process_available_jobs
       MidgetJob.transaction do
-        MidgetJob.for_processing.lock("FOR UPDATE SKIP LOCKED").each do |midget_job|
+        MidgetJob.for_processing.limit(Rails.configuration.x.midget_jobs.at_once).lock("FOR UPDATE SKIP LOCKED").each do |midget_job|
           Rails.logger.info "#{self.class.name} firing midget_job: #{midget_job.id}"
           midget_job.fire_thread
           midget_job.destroy!
