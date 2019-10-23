@@ -11,8 +11,12 @@ class MidgetJob < ActiveRecord::Base
     Rails.logger.info "#{self.class.name} fire_thread started"
     Thread.new do
       Rails.logger.info "#{self.class.name}.fire_thread execute serialized job"
-      ActiveJob::Base.execute serialized
-    end.abort_on_exception = true
+      begin
+        ActiveJob::Base.execute serialized
+      rescue => detail
+        Rails.logger.error detail.cause
+      end
+    end
   end
 
   def self.process_notification(hash_data)
