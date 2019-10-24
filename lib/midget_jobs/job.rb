@@ -3,9 +3,8 @@ require 'midget_jobs/scheduler'
 
 module MidgetJobs
   class Job
-    class_attribute :scheduler
-
     class << self
+      attr_reader :scheduler
       # @param [ActiveJob::Base] job
       # @param [Time] at
       def enqueue(job, at: nil)
@@ -26,7 +25,7 @@ module MidgetJobs
           when 'INSERT'
             @scheduler.wakeup!
           else
-            raise "unknown action #{hash_data[:action]}"
+            raise  ArgumentError, "unknown action #{hash_data[:action]}"
         end
       end
     end

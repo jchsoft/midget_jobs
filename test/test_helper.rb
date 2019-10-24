@@ -11,6 +11,7 @@ require 'midget_jobs'
 
 require 'minitest/autorun'
 require 'minitest/reporters'
+require 'minitest/stub_any_instance'
 
 class Rails
   class << self
