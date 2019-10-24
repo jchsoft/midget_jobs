@@ -3,4 +3,8 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in midget_job.gemspec
 gemspec
 
-gem 'minitest-reporters'
+group :test do
+  gem 'minitest'
+  gem 'minitest-reporters'
+  gem 'minitest-stub_any_instance'
+end

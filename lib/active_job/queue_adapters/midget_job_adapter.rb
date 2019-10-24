@@ -23,10 +23,6 @@ module ActiveJob
         []
       end
 
-      def perform_enqueued_jobs
-
-      end
-
       class JobWrapper < MidgetJobs::Job
         def run(serialized_job)
           Base.execute serialized_job
