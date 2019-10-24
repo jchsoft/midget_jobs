@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 ENV["RAILS_ENV"] = "test"
-class Rails
-  class << self
-    attr_reader :env
-  end
-  @env = 'test'
-end
 
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 
@@ -17,6 +11,14 @@ require 'midget_jobs'
 
 require 'minitest/autorun'
 require 'minitest/reporters'
+
+class Rails
+  class << self
+    attr_reader :env, :logger
+  end
+  @env = 'test'
+  @logger = Logger.new STDOUT
+end
 
 Minitest::Reporters.use!
 
