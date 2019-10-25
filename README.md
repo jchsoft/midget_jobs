@@ -1,8 +1,8 @@
-# MidgetJob
+# MidgetJobs
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/midget_job`. To experiment with that code, run `bin/console` for an interactive prompt.
+MidgetJobs is simple implementation of background jobs for [Ruby on Rails](https://rubyonrails.org). I does not meant to be used without it.
+It is connected to [ActiveJob](https://github.com/rails/rails/tree/master/activejob) and [PostgreSQL](https://www.postgresql.org) using its triggers, notifications and listening.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -15,24 +15,26 @@ gem 'midget_job'
 And then execute:
 
     $ bundle
+    
+Then run    
 
-Or install it yourself as:
-
-    $ gem install midget_job
-
+    $ rails generate midget_jobs:install
+    
+This generator creates an initializer file at config/initializers and migrations to db/migrate
+      
 ## Usage
 
-TODO: Write usage instructions here
+Just use [ActiveJob](https://github.com/rails/rails/tree/master/activejob) as described in [Guides](https://guides.rubyonrails.org/active_job_basics.html) 
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`. 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/midget_job. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jchsoft/midget_jobs. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
