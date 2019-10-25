@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["josefchmel"]
   spec.email         = ["chmel@jchsoft.cz"]
 
-  spec.summary       = %q{Small background job scheduler closely related with Rails ActiveJob.}
+  spec.summary       = %q{Small background job scheduler closely related with Rails ActiveJob and PostgreSQL.}
   # spec.description   = %q{TODO: Write a longer description or delete this line.}
   spec.homepage      = "https://github.com/jchsoft/midget_jobs"
   spec.license       = "MIT"
