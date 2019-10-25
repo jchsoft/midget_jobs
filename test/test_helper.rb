@@ -15,10 +15,11 @@ require 'minitest/stub_any_instance'
 
 class Rails
   class << self
-    attr_reader :env, :logger
+    attr_reader :env, :logger, :configuration
   end
   @env = 'test'
   @logger = Logger.new STDOUT
+  @configuration = OpenStruct.new( x: OpenStruct.new(midget_jobs: OpenStruct.new(at_once: 2)))
 end
 
 Minitest::Reporters.use!

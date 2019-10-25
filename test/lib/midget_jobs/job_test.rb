@@ -20,7 +20,7 @@ class JobTest < Minitest::Test
 
   def test_schedule_start
     MidgetJobs::Scheduler.stub_any_instance(:call, 'running') do
-      assert_equal nil, MidgetJobs::Job.scheduler
+      refute_equal 'running', MidgetJobs::Job.scheduler
       MidgetJobs::Job.schedule
       assert_equal 'running', MidgetJobs::Job.scheduler
     end
