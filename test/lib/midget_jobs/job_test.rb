@@ -5,6 +5,7 @@ class JobTest < Minitest::Test
   include ActiveSupport::Testing::Assertions
 
   def test_enqueue_job
+    MidgetJob.delete_all
     assert_difference('MidgetJob.count') do
       MidgetJobs::Job.enqueue OpenStruct.new({job_id: 'FGHDG45645', queue_name: 'queue_name', serialize: 'serialize'})
     end
