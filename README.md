@@ -9,7 +9,7 @@ It is connected to [ActiveJob](https://github.com/rails/rails/tree/master/active
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'midget_job'
+gem 'midget_jobs'
 ```
 
 And then execute:
