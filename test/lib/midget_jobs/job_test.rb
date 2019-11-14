@@ -11,6 +11,28 @@ class JobTest < Minitest::Test
     end
   end
 
+  def test_enqueue_delayed_job
+    MidgetJob.delete_all
+    assert_difference('MidgetJob.count') do
+      MidgetJobs::Job.enqueue OpenStruct.new({job_id: 'FGHDG45645', queue_name: 'queue_name', serialize: 'serialize'}), at: 1.hour.from_now
+    end
+  end
+
+  def test_enqueue_delayed_job_as_float
+    MidgetJob.delete_all
+    assert_difference('MidgetJob.count') do
+      MidgetJobs::Job.enqueue OpenStruct.new({job_id: 'FGHDG45645', queue_name: 'queue_name', serialize: 'serialize'}), at: 1.hour.from_now.to_f
+    end
+  end
+
+
+  def test_enqueue_delayed_job_as_int
+    MidgetJob.delete_all
+    assert_difference('MidgetJob.count') do
+      MidgetJobs::Job.enqueue OpenStruct.new({job_id: 'FGHDG45645', queue_name: 'queue_name', serialize: 'serialize'}), at: 1.hour.from_now.to_i
+    end
+  end
+
   def test_enqueued_job
     MidgetJob.delete_all
     assert_equal 0, MidgetJobs::Job.enqueued_jobs.count
