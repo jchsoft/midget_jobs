@@ -8,6 +8,7 @@ module MidgetJobs
       # @param [ActiveJob::Base] job
       # @param [Time] at
       def enqueue(job, at: nil)
+        at = Time.at at if at.is_a? Float
         MidgetJob.create!(job_id: job.job_id, queue: job.queue_name, serialized: job.serialize, run_at: (at or 1.second.from_now))
       end
 
