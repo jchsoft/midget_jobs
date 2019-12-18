@@ -14,6 +14,7 @@ module MidgetJobs
     end
 
     def wakeup!
+      Rails.logger.info "#{self.class.name}.#{__method__}"
       @thread.wakeup
     end
 
@@ -22,7 +23,7 @@ module MidgetJobs
     def process_available_jobs
       MidgetJob.transaction do
         MidgetJob.for_processing.limit(Rails.configuration.x.midget_jobs.at_once).lock("FOR UPDATE SKIP LOCKED").each do |midget_job|
-          Rails.logger.info "#{self.class.name} firing midget_job: #{midget_job.id}"
+          Rails.logger.info "#{self.class.name} firing midget_job: #{midget_job.id} - #{midget_job.serialized['job_class']}"
           midget_job.fire_thread
           midget_job.destroy!
         end
@@ -33,8 +34,10 @@ module MidgetJobs
     def sleep_till_next_job
       most_current = MidgetJob.order(run_at: :asc).first
       if most_current
+        Rails.logger.info "#{self.class.name}.#{__method__} (#{[most_current.run_at.to_f - Time.current.to_f, 0.001].max} sec) till #{most_current.serialized['job_class']}"
         sleep [most_current.run_at.to_f - Time.current.to_f, 0.001].max
       else
+        Rails.logger.info "#{self.class.name}.#{__method__}(Thread.stop)"
         Thread.stop
       end
     end

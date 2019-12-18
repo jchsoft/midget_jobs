@@ -7,8 +7,8 @@ module PostgresNotificationsListener
       Rails.logger.info "#{self.name} listening_job running on #{self.name.pluralize.underscore}_notices"
       self.connection.execute "LISTEN #{self.name.pluralize.underscore}_notices"
       loop do
-        Rails.logger.info "#{self.name} listening_job wait_for_notify"
         begin
+          Rails.logger.info "#{self.name} listening_job wait_for_notify"
           self.connection.raw_connection.wait_for_notify do |event, pid, payload|
             data = JSON.parse payload, symbolize_names: true
             Rails.logger.info "postgres #{event.inspect}, pid: #{pid.inspect}, data: #{data.inspect}"
