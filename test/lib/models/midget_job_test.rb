@@ -63,7 +63,7 @@ class MidgetJobTest < Minitest::Test
 
   def test_scope_for_processing
     travel_to Time.new(2004, 11, 24, 01, 04, 44, '+00:00') do
-      assert_equal "SELECT \"midget_jobs\".* FROM \"midget_jobs\" WHERE (run_at < '2004-11-24 01:04:44')", MidgetJob.for_processing.to_sql
+      assert_equal "SELECT \"midget_jobs\".* FROM \"midget_jobs\" WHERE \"midget_jobs\".\"runner\" = 'SomeApp' AND (run_at < '2004-11-24 01:04:44')", MidgetJob.for_processing.to_sql
     end
   end
 

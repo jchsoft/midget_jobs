@@ -19,7 +19,7 @@ class Rails
   end
   @env = 'test'
   @logger = Logger.new STDOUT
-  @configuration = OpenStruct.new( x: OpenStruct.new(midget_jobs: OpenStruct.new(at_once: 2)))
+  @configuration = OpenStruct.new( x: OpenStruct.new(midget_jobs: OpenStruct.new(at_once: 2, runner: 'SomeApp')))
 end
 
 Minitest::Reporters.use!

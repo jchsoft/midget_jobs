@@ -3,6 +3,15 @@
 MidgetJobs is simple implementation of background jobs for [Ruby on Rails](https://rubyonrails.org). I does not meant to be used without it.
 It is connected to [ActiveJob](https://github.com/rails/rails/tree/master/activejob) and [PostgreSQL](https://www.postgresql.org) using its triggers, notifications and listening.
 
+## Update from 0.1.7 to 0.2.0
+There is new column **runner** in **midget_jobs** table!
+It is used to recognise who will run particular job (if there are multiple application over one database)
+
+I added new configuration to Initializer. Add this to your config/initializers/midget_jobs.rb
+```Rails.application.config.x.midget_jobs.runner = Rails.application.class.parent_name```
+
+Please create migration with generator
+```rails generate migration AddRunnerToMidgetJob runner:string:index``` 
 
 ## Installation
 
