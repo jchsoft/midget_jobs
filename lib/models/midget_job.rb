@@ -16,7 +16,7 @@ class MidgetJob < ActiveRecord::Base
       rescue => detail
         Rails.logger.error detail.cause
       end
-    end
+    end.abort_on_exception = true
   end
 
   def self.process_notification(hash_data)
