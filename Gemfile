@@ -12,4 +12,5 @@ group :test do
   gem 'activerecord'
   gem 'pg'
   gem 'activesupport'
+  gem 'simplecov', require: false
 end

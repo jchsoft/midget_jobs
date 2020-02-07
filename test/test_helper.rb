@@ -7,6 +7,9 @@ require 'pg'
 require 'active_record'
 require 'yaml'
 
+require 'simplecov'
+SimpleCov.start 'rails'
+
 require 'midget_jobs'
 
 require 'minitest/autorun'
