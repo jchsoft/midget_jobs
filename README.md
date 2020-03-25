@@ -30,6 +30,24 @@ Then run
     $ rails generate midget_jobs:install
     
 This generator creates an initializer file at config/initializers and migrations to db/migrate
+
+#### With Puma's multiple workers on production
+
+In file `config/initializers/midget_jobs.rb` disable start with puma:
+
+    ...
+    if Rails.const_defined?('Server')# || $0.include?('puma')
+
+In file `config/puma/production.rb` update `on_worker_boot do` block as:
+
+    ...
+    on_worker_boot do
+      ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
+      Rails.logger.debug 'on_worker_boot starting jobs'
+    
+      MidgetJobs.initialize_workers
+      ...
+    end
       
 ## Usage
 
