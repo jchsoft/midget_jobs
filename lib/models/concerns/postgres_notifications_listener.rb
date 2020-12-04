@@ -39,6 +39,6 @@ module PostgresNotificationsListener
   end
 
   def too_soon?
-    (Time.zone.now - @last_exception_time) < TOO_SOON
+    (Time.zone.now - @last_exception_time) < TOO_SOON if @last_exception_time.present?
   end
 end
