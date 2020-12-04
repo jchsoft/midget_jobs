@@ -22,12 +22,28 @@ class SchedulerTest < Minitest::Test
       scheduler = MidgetJobs::Scheduler.new.call
       thread = scheduler.instance_variable_get(:@thread)
       thread.join 0.1
-      MidgetJob.create!(job_id: 'ZTR8765', queue: 'QQQQ', serialized: 'serialized', run_at: 1.second.from_now)
+      MidgetJob.create!(job_id: 'ZTR8765', queue: 'QQQQ', serialized: serialized_demo, run_at: 1.second.from_now)
       scheduler.wakeup!
       thread.join 1
       assert thread_fired
       assert_empty MidgetJob.all.to_a
       thread.kill
     end
+  end
+
+  private
+
+  def serialized_demo
+    {"job_id"=>"5c43ee05-5aa9-45cc-9cd0-c4adde671bac",
+     "locale"=>"en",
+     "priority"=>nil,
+     "timezone"=>"Prague",
+     "arguments"=>[962],
+     "job_class"=>"PeriodicPieceJob",
+     "executions"=>0,
+     "queue_name"=>"periodic_piece",
+     "enqueued_at"=>"2020-12-01T09:00:00Z",
+     "provider_job_id"=>nil,
+     "exception_executions"=>{}}
   end
 end
