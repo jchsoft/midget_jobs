@@ -18,14 +18,14 @@ module PostgresNotificationsListener
         end
       rescue PG::ConnectionBad => e
         measure_exception_severity
-        Rails.logger.error "#{name} listening_job wait_for_notify lost connection #{e.inspect} retry #{exception_counter}th time!"
+        Rails.logger.error "#{name} listening_job wait_for_notify lost connection #{e.inspect} retry #{@exception_counter}th time!"
         Rails.logger.error 'Reestablish AR connection...'
         ActiveRecord::Base.connection.verify!
         sleep 0.1
         @exception_counter.to_i < EXCEPTION_TIME ? retry : raise(e)
       rescue StandardError => e
         measure_exception_severity
-        Rails.logger.error "#{name} listening_job wait_for_notify exception #{e.inspect} retry #{exception_counter}th time!"
+        Rails.logger.error "#{name} listening_job wait_for_notify exception #{e.inspect} retry #{@exception_counter}th time!"
         sleep 0.1
         @exception_counter.to_i < EXCEPTION_TIME ? retry : raise(e)
       end
