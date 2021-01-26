@@ -22,12 +22,12 @@ module PostgresNotificationsListener
         Rails.logger.error 'Reestablish AR connection...'
         ActiveRecord::Base.connection.verify!
         sleep 0.1
-        @exception_counter.to_i < EXCEPTION_TIME ? retry : raise(e)
+        @exception_counter.to_i < TIME_TO_DIE ? retry : raise(e)
       rescue StandardError => e
         measure_exception_severity
         Rails.logger.error "#{name} listening_job wait_for_notify exception #{e.inspect} retry #{@exception_counter}th time!"
         sleep 0.1
-        @exception_counter.to_i < EXCEPTION_TIME ? retry : raise(e)
+        @exception_counter.to_i < TIME_TO_DIE ? retry : raise(e)
       end
     end.abort_on_exception = true
   end
@@ -39,6 +39,6 @@ module PostgresNotificationsListener
   end
 
   def too_soon?
-    (Time.zone.now - @last_exception_time) < TOO_SOON if @last_exception_time.present?
+    (Time.zone.now - @last_exception_time) < EXCEPTION_TIME if @last_exception_time.present?
   end
 end
